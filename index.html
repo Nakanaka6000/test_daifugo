@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大富豪</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>大富豪</h1>
+
+    <div id="game-container">
+        <div id="player-area-opponent-2" class="player-area opponent">
+            <h2>CPU 2</h2>
+            <div class="hand">
+                <div class="card-back"></div>
+                <span class="card-count">13</span>
+            </div>
+        </div>
+
+        <div id="center-area">
+            <div id="player-area-opponent-1" class="player-area opponent side">
+                <h2>CPU 1</h2>
+                <div class="hand">
+                    <div class="card-back"></div>
+                    <span class="card-count">13</span>
+                </div>
+            </div>
+
+            <div id="table">
+                <div id="table-cards"></div>
+                <p id="status-message">あなたの番です</p>
+            </div>
+
+            <div id="player-area-opponent-3" class="player-area opponent side">
+                <h2>CPU 3</h2>
+                <div class="hand">
+                    <div class="card-back"></div>
+                    <span class="card-count">13</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="player-area-human" class="player-area human">
+            <h2>あなた</h2>
+            <div id="human-hand" class="hand"></div>
+            <div id="player-controls">
+                <button id="play-button">出す</button>
+                <button id="pass-button">パス</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
