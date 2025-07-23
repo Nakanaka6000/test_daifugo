@@ -156,11 +156,20 @@ h1 {
     background-position: 0 0, 10px 10px;
 }
 
+.card-back-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .card-count {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-left: 10px;
-    color: #fff;
+    position: absolute;
+    font-size: 2em; /* Larger font size */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); /* Add shadow for readability */
+    pointer-events: none; /* Make text non-interactive */
 }
 
 .card .suit {

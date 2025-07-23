@@ -121,16 +121,23 @@ document.addEventListener('DOMContentLoaded', () => {
             if (rankings.includes(opponent)) continue;
 
             const handElement = opponentHandElements[opponent];
-            handElement.innerHTML = '';
+            handElement.innerHTML = ''; // Clear previous content
             const cardCount = hands[opponent].length;
+
             if (cardCount > 0) {
+                const container = document.createElement('div');
+                container.className = 'card-back-container';
+
                 const cardBack = document.createElement('div');
                 cardBack.className = 'card-back';
-                handElement.appendChild(cardBack);
+                container.appendChild(cardBack);
+
                 const countElement = document.createElement('span');
                 countElement.className = 'card-count';
                 countElement.textContent = cardCount;
-                handElement.appendChild(countElement);
+                container.appendChild(countElement);
+
+                handElement.appendChild(container);
             }
         }
     }
@@ -451,11 +458,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (tableCards.length === 0) {
                 return false;
             }
+            // An 8-slice cannot be played on a Joker.
+            if (tableCards.some(c => c.rank === 'Joker')) {
+                return false;
+            }
             // The number of cards must match the table
             if (playedCards.length !== tableCards.length) {
                 return false;
             }
-            // 8-slice is always a valid play regardless of revolution or card value, as long as conditions are met.
+            // 8-slice is a valid play if conditions are met.
             return true;
         }
 
