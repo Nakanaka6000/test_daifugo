@@ -63,14 +63,16 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function getCardValue(rank) {
         const rankValues = { '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14, '2': 15 };
-        if (rank === 'Joker') return 99;
+        if (rank === 'Joker') return 99; // Joker is always strongest
+        if (rank === '8') return 98; // 8 has a special high value for "8-slice" logic, but isn't the strongest card
 
         if (isRevolution) {
             const value = rankValues[rank];
+            // In revolution, strength is inverted, but 8 and Joker are exceptions
             if (value >= 3 && value <= 15) {
-                return 18 - value; // (3->15, 4->14, ..., 15->3)
+                return 18 - value; // (3->15, 4->14, ..., A->4, 2->3)
             }
-            return value;
+            return value; // Should not be reached for standard cards
         } else {
             return rankValues[rank];
         }
@@ -181,15 +183,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Checks if a play consists of only 8s (and/or Jokers) and is not a sequence.
+     * Checks if a play consists of only 8s (and/or Jokers).
      * @param {Array<object>} cards - The cards to check.
      * @returns {boolean}
      */
     function isEightSlicePlay(cards) {
         if (cards.length === 0) return false;
-        const playType = getPlayType(cards);
-        // Must be a single, pair, etc. of 8s, not a sequence containing an 8.
-        return playType !== 'sequence' && cards.every(c => c.rank === '8' || c.rank === 'Joker');
+        // An 8-slice play consists only of 8s and Jokers.
+        return cards.every(c => c.rank === '8' || c.rank === 'Joker');
     }
 
     function handlePlayAction() {
@@ -250,11 +251,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isSpade3Reversal || isEightSlice) {
                 const message = isSpade3Reversal ? "スペ3返し！" : "8切り！";
                 statusMessageElement.textContent = `${currentPlayer}が${message}`;
+                // 8-slice clears the table and the current player gets to play again.
                 setTimeout(() => {
                     tableCards = [];
                     renderTable();
                     passCount = 0;
-                    updateStatus();
+                    // Do NOT call nextTurn(), the same player continues.
+                    updateStatus(); 
                 }, 1000);
             } else {
                 passCount = 0;
@@ -331,11 +334,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isSpade3Reversal || isEightSlice) {
                 const message = isSpade3Reversal ? "スペ3返し！" : "8切り！";
                 statusMessageElement.textContent = `${currentPlayer}が${message}`;
+                // 8-slice clears the table and the current player gets to play again.
                 setTimeout(() => {
                     tableCards = [];
                     renderTable();
                     passCount = 0;
-                    updateStatus();
+                    // Do NOT call nextTurn(), the same player continues.
+                    updateStatus(); 
                 }, 1000);
             } else {
                 passCount = 0;
@@ -442,17 +447,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Special rule: 8-slice
         if (isEightSlicePlay(playedCards)) {
-            // Card count must match
+            // 8-slice is only valid if there are cards on the table
+            if (tableCards.length === 0) {
+                return false;
+            }
+            // The number of cards must match the table
             if (playedCards.length !== tableCards.length) {
                 return false;
             }
-            // During a revolution, the 8-play must still be stronger.
-            if (isRevolution) {
-                const playedValue = getHandValue(playedCards);
-                const tableValue = getHandValue(tableCards);
-                return playedValue > tableValue;
-            }
-            // If not a revolution, an 8-slice is always valid on a non-empty table.
+            // 8-slice is always a valid play regardless of revolution or card value, as long as conditions are met.
             return true;
         }
 
