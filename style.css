@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
 body {
-    font-family: sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #e8eef2; /* Light blue-gray background */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,6 +15,8 @@ h1 {
     position: absolute;
     top: 20px;
     width: 100%;
+    color: #333;
+    font-weight: 700;
 }
 
 #game-container {
@@ -27,18 +31,24 @@ h1 {
 }
 
 .player-area {
-    border: 2px solid #ccc;
-    border-radius: 10px;
+    border: 1px solid #d1d9e0;
+    border-radius: 12px;
     padding: 10px;
     margin: 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: #fdfdfd;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.player-area:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .player-area h2 {
     margin-top: 0;
     font-size: 1.2em;
     text-align: center;
+    color: #555;
 }
 
 .hand {
@@ -80,7 +90,7 @@ h1 {
 #table {
     width: 50%;
     height: 250px;
-    border: 2px dashed #aaa;
+    border: 2px dashed #cdd5db;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -101,14 +111,15 @@ h1 {
     margin-top: 10px;
     font-weight: bold;
     font-size: 1.1em;
+    color: #4a5568;
 }
 
 /* --- Cards --- */
 .card, .card-back {
     width: 60px;
     height: 90px;
-    border: 1px solid #333;
-    border-radius: 5px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
     margin: 2px;
     background-color: white;
     display: flex;
@@ -117,29 +128,30 @@ h1 {
     align-items: center;
     font-size: 1.5em;
     font-weight: bold;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     position: relative; /* For pseudo-elements */
+    transition: all 0.2s ease-out;
 }
 
 .human .card {
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .human .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
 .human .card.selected {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     border-color: #007bff;
-    box-shadow: 0 0 10px #007bff;
+    box-shadow: 0 0 12px rgba(0, 123, 255, 0.5);
 }
 
 .card-back {
-    background-color: #555;
-    background-image: linear-gradient(45deg, #666 25%, transparent 25%, transparent 75%, #666 75%, #666), linear-gradient(45deg, #666 25%, transparent 25%, transparent 75%, #666 75%, #666);
+    background-color: #5a677d;
+    background-image: linear-gradient(135deg, #6b7b92 25%, transparent 25%, transparent 75%, #6b7b92 75%, #6b7b92), 
+                      linear-gradient(45deg, #6b7b92 25%, transparent 25%, transparent 75%, #6b7b92 75%, #6b7b92);
     background-size: 20px 20px;
     background-position: 0 0, 10px 10px;
 }
@@ -148,6 +160,7 @@ h1 {
     font-size: 1.2em;
     font-weight: bold;
     margin-left: 10px;
+    color: #fff;
 }
 
 .card .suit {
@@ -162,34 +175,54 @@ h1 {
 }
 
 .card.red {
-    color: red;
+    color: #d9534f;
 }
 
 .card.black {
-    color: black;
+    color: #333;
 }
 
 /* --- Controls --- */
 #player-controls {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 #player-controls button {
-    font-size: 1.2em;
-    padding: 10px 20px;
+    font-size: 1.1em;
+    font-weight: 700;
+    padding: 10px 25px;
     margin: 5px;
     cursor: pointer;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #eee;
+    border-radius: 8px;
+    border: none;
+    background-color: #4a90e2;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    transition: all 0.2s ease;
 }
 
-#player-controls button:hover {
-    background-color: #ddd;
+#player-controls button:hover:not(:disabled) {
+    background-color: #357abd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#player-controls button#pass-button {
+    background-color: #f0f0f0;
+    color: #555;
+}
+
+#player-controls button#pass-button:hover:not(:disabled) {
+    background-color: #e0e0e0;
 }
 
 #player-controls button:disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+    opacity: 0.6;
+}
+
+/* --- Utility --- */
+.hidden {
+    display: none;
 }
