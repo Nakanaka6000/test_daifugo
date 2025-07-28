@@ -64,11 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function getCardValue(rank) {
         const rankValues = { '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14, '2': 15 };
         if (rank === 'Joker') return 99; // Joker is always strongest
-        if (rank === '8') return 98; // 8 has a special high value for "8-slice" logic, but isn't the strongest card
 
         if (isRevolution) {
             const value = rankValues[rank];
-            // In revolution, strength is inverted, but 8 and Joker are exceptions
+            // In revolution, strength is inverted
             if (value >= 3 && value <= 15) {
                 return 18 - value; // (3->15, 4->14, ..., A->4, 2->3)
             }
@@ -464,6 +463,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // The number of cards must match the table
             if (playedCards.length !== tableCards.length) {
+                return false;
+            }
+            // New: 8-slice can only be played on cards weaker than 8 (now considers revolution).
+            const tableValue = getHandValue(tableCards);
+            const eightValue = getCardValue('8');
+            if (tableValue >= eightValue) {
                 return false;
             }
             // 8-slice is a valid play if conditions are met.
