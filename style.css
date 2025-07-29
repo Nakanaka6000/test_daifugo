@@ -2,53 +2,65 @@
 
 body {
     font-family: 'Noto Sans JP', sans-serif;
-    background-color: #e8eef2; /* Light blue-gray background */
+    background-color: #f0f2f5; /* Very light gray background */
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Arrange children vertically */
+    justify-content: flex-start; /* Align content to the top */
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    padding: 20px; /* Add some padding around the content */
+    box-sizing: border-box;
 }
 
 h1 {
     text-align: center;
-    position: absolute;
-    top: 20px;
-    width: 100%;
-    color: #333;
+    color: #2c3e50; /* Darker text for contrast */
     font-weight: 700;
+    font-size: 2.5em;
+    margin-bottom: 30px; /* Space below the title */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
 }
 
 #game-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90vw;
+    width: 95vw; /* Slightly wider */
     height: 90vh;
     max-width: 1200px;
-    max-height: 800px;
-    margin-top: 60px; /* Add margin to avoid overlap with h1 */
+    max-height: 850px; /* Slightly taller */
+    margin-top: 0; /* No need for margin-top now */
+    background-color: #ffffff; /* White background for the game area */
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* More prominent shadow */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .player-area {
-    border: 1px solid #d1d9e0;
-    border-radius: 12px;
-    padding: 10px;
-    margin: 5px;
-    background-color: #fdfdfd;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: box-shadow 0.3s ease;
+    border: none; /* Remove border */
+    border-radius: 10px; /* Slightly smaller radius */
+    padding: 15px; /* More padding */
+    margin: 8px; /* More margin */
+    background-color: #f8f9fa; /* Lighter background */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06); /* Softer shadow */
+    transition: all 0.3s ease; /* Smooth transition for all properties */
 }
 
 .player-area:hover {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Slightly more pronounced hover shadow */
+    transform: translateY(-2px); /* Subtle lift effect */
 }
 
 .player-area h2 {
     margin-top: 0;
-    font-size: 1.2em;
+    margin-bottom: 10px; /* Space below title */
+    font-size: 1.1em; /* Slightly smaller font */
     text-align: center;
-    color: #555;
+    color: #34495e; /* Darker text */
+    border-bottom: 1px solid #e0e0e0; /* Subtle separator */
+    padding-bottom: 8px;
 }
 
 .hand {
@@ -56,47 +68,56 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    min-height: 80px;
+    min-height: 90px; /* Slightly taller */
+    gap: 5px; /* Gap between cards */
 }
 
 /* --- Player Areas --- */
 .human {
     order: 3;
-    width: 80%;
+    width: 90%; /* Wider for human player */
+    margin-top: 20px; /* More space from table */
 }
 
 .opponent {
     text-align: center;
+    flex-grow: 1; /* Allow opponents to grow */
 }
 
 #player-area-opponent-2 { /* Top */
     order: 1;
-    width: 60%;
+    width: 70%; /* Wider for top opponent */
+    margin-bottom: 20px; /* Space from center area */
 }
 
 #center-area {
     order: 2;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-around; /* Distribute space evenly */
+    align-items: flex-start; /* Align items to the top */
     width: 100%;
+    flex-grow: 1; /* Allow center area to grow */
 }
 
 .side {
-    width: 15%;
-    min-height: 200px;
+    width: 20%; /* Wider for side opponents */
+    min-height: 180px; /* Adjusted height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #table {
-    width: 50%;
-    height: 250px;
-    border: 2px dashed #cdd5db;
-    border-radius: 10px;
+    width: 45%; /* Slightly narrower table */
+    height: 220px; /* Adjusted height */
+    border: 2px dashed #aebbc4; /* Softer dashed border */
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 15px;
+    background-color: #e9ecef; /* Light gray background for table */
 }
 
 #table-cards {
@@ -105,55 +126,61 @@ h1 {
     justify-content: center;
     align-items: center;
     min-height: 100px;
+    gap: 5px; /* Gap between cards on table */
 }
 
 #status-message {
-    margin-top: 10px;
+    margin-top: 15px;
     font-weight: bold;
-    font-size: 1.1em;
-    color: #4a5568;
+    font-size: 1.2em;
+    color: #2c3e50;
+    background-color: #ffffff;
+    padding: 8px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 /* --- Cards --- */
 .card, .card-back {
-    width: 60px;
-    height: 90px;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-    margin: 2px;
-    background-color: white;
+    width: 65px; /* Slightly wider */
+    height: 95px; /* Slightly taller */
+    border: 1px solid #e0e0e0; /* Lighter border */
+    border-radius: 8px; /* More rounded corners */
+    margin: 3px; /* Slightly more margin */
+    background-color: #ffffff; /* White background */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.5em;
+    font-size: 1.4em; /* Slightly smaller font */
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: relative; /* For pseudo-elements */
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1); /* Softer shadow */
+    position: relative;
     transition: all 0.2s ease-out;
+    cursor: default; /* Default cursor for all cards */
 }
 
 .human .card {
-    cursor: pointer;
+    cursor: pointer; /* Pointer for human cards */
 }
 
 .human .card:hover {
-    transform: translateY(-12px) scale(1.05);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    transform: translateY(-10px) scale(1.03); /* Slightly less dramatic hover */
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
 }
 
 .human .card.selected {
-    transform: translateY(-8px);
-    border-color: #007bff;
-    box-shadow: 0 0 12px rgba(0, 123, 255, 0.5);
+    transform: translateY(-6px);
+    border-color: #007bff; /* Blue border for selected */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
 }
 
 .card-back {
-    background-color: #5a677d;
-    background-image: linear-gradient(135deg, #6b7b92 25%, transparent 25%, transparent 75%, #6b7b92 75%, #6b7b92), 
-                      linear-gradient(45deg, #6b7b92 25%, transparent 25%, transparent 75%, #6b7b92 75%, #6b7b92);
-    background-size: 20px 20px;
-    background-position: 0 0, 10px 10px;
+    background-color: #6c757d; /* Darker gray */
+    background-image: linear-gradient(135deg, #7a8288 25%, transparent 25%, transparent 75%, #7a8288 75%, #7a8288), 
+                      linear-gradient(45deg, #7a8288 25%, transparent 25%, transparent 75%, #7a8288 75%, #7a8288);
+    background-size: 18px 18px; /* Slightly smaller pattern */
+    background-position: 0 0, 9px 9px;
 }
 
 .card-back-container {
@@ -161,74 +188,78 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 65px; /* Match card width */
+    height: 95px; /* Match card height */
 }
 
 .card-count {
     position: absolute;
-    font-size: 2em; /* Larger font size */
+    font-size: 2.2em; /* Slightly larger font */
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); /* Add shadow for readability */
-    pointer-events: none; /* Make text non-interactive */
+    color: rgba(255, 255, 255, 0.9); /* More opaque white */
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.8); /* Stronger shadow */
+    pointer-events: none;
 }
 
 .card .suit {
-    font-size: 0.8em;
+    font-size: 0.9em; /* Slightly larger suit */
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 6px;
+    left: 6px;
 }
 
 .card .rank {
-    font-size: 1.2em;
+    font-size: 1.3em; /* Slightly larger rank */
 }
 
 .card.red {
-    color: #d9534f;
+    color: #dc3545; /* Bootstrap red */
 }
 
 .card.black {
-    color: #333;
+    color: #343a40; /* Bootstrap dark gray */
 }
 
 /* --- Controls --- */
 #player-controls {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 25px; /* More space */
 }
 
 #player-controls button {
-    font-size: 1.1em;
-    font-weight: 700;
-    padding: 10px 25px;
-    margin: 5px;
+    font-size: 1.05em; /* Slightly smaller font */
+    font-weight: 600; /* Lighter font weight */
+    padding: 12px 30px; /* More padding */
+    margin: 8px; /* More margin */
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 6px; /* Slightly less rounded */
     border: none;
-    background-color: #4a90e2;
+    background-color: #007bff; /* Bootstrap primary blue */
     color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1); /* Softer shadow */
     transition: all 0.2s ease;
 }
 
 #player-controls button:hover:not(:disabled) {
-    background-color: #357abd;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-1px); /* Subtle lift */
+    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
 }
 
 #player-controls button#pass-button {
-    background-color: #f0f0f0;
-    color: #555;
+    background-color: #6c757d; /* Bootstrap secondary gray */
+    color: white; /* White text for better contrast */
 }
 
 #player-controls button#pass-button:hover:not(:disabled) {
-    background-color: #e0e0e0;
+    background-color: #5a6268; /* Darker gray on hover */
 }
 
 #player-controls button:disabled {
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: 0.5; /* More transparent when disabled */
+    box-shadow: none; /* No shadow when disabled */
+    transform: none; /* No transform when disabled */
 }
 
 /* --- Utility --- */
