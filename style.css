@@ -142,20 +142,21 @@ h1 {
 
 /* --- Cards --- */
 .card, .card-back {
-    width: 65px; /* Slightly wider */
-    height: 95px; /* Slightly taller */
+    width: 65px; /* Keep current width */
+    height: 95px; /* Keep current height */
     border: 1px solid #e0e0e0; /* Lighter border */
     border-radius: 8px; /* More rounded corners */
     margin: 3px; /* Slightly more margin */
     background-color: #ffffff; /* White background */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    /* Removed flex properties */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
     font-size: 1.4em; /* Slightly smaller font */
     font-weight: bold;
     box-shadow: 0 3px 8px rgba(0,0,0,0.1); /* Softer shadow */
-    position: relative;
+    position: relative; /* Add relative positioning */
     transition: all 0.2s ease-out;
     cursor: default; /* Default cursor for all cards */
 }
@@ -202,14 +203,18 @@ h1 {
 }
 
 .card .suit {
-    font-size: 0.9em; /* Slightly larger suit */
+    font-size: 0.9em;
     position: absolute;
     top: 6px;
     left: 6px;
 }
 
 .card .rank {
-    font-size: 1.3em; /* Slightly larger rank */
+    font-size: 1.3em;
+    position: absolute; /* Position rank absolutely */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
 }
 
 .card.red {
