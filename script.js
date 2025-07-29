@@ -195,8 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function isEightSlicePlay(cards) {
         if (cards.length === 0) return false;
-        // An 8-slice play consists only of 8s and Jokers.
-        return cards.every(c => c.rank === '8' || c.rank === 'Joker');
+        // An 8-slice play must contain at least one 8, and only 8s and Jokers.
+        return cards.some(c => c.rank === '8') && cards.every(c => c.rank === '8' || c.rank === 'Joker');
     }
 
     function handlePlayAction() {
